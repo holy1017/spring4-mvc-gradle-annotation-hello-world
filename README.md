@@ -1,3 +1,35 @@
+실행 순서
+=============================== 
+1. com.mkyong.helloworld.servlet3
+  - MyWebInitializer
+    - getRootConfigClasses
+      - SpringRootConfig.java
+        - @Configuration
+        - @ComponentScan({ "com.mkyong.helloworld.service" })
+          - HelloWorldService.java
+            - @Service
+    - getServletConfigClasses
+      - SpringWebConfig.java
+        - @EnableWebMvc
+        - @Configuration
+        - @ComponentScan({ "com.mkyong.helloworld.web" })
+          - WelcomeController.java
+            - @RequestMapping(value = "/", method = RequestMethod.GET)
+            - @RequestMapping(value = "/hello/{name:.+}", method = RequestMethod.GET)
+            - return "index"
+        - addResourceHandlers
+          - "/resources/**" -> "/resources/"
+        - viewResolver
+          - InternalResourceViewResolver
+          - "/WEB-INF/views/jsp/"
+          - ".jsp"
+    - getServletMappings
+      - "/"
+
+4. com.mkyong.helloworld.web
+
+
+
 Gradle - Spring 4 MVC Hello World
 ===============================
 Template for Spring 4 MVC + JSP view + Annotation configuration, using Gradle build tool.
